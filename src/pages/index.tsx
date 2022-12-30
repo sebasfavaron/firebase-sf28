@@ -1,20 +1,15 @@
 import { DndContext } from "@dnd-kit/core";
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Draggable } from "../components/Draggable";
 import Dropdown from "../components/Dropdown";
 import { Droppable } from "../components/Droppable";
-
-type Token = { token: { name: string; tokenId: string } };
-type Tokens = {
-  tokens: Token[];
-};
-type Collections = {
-  collections: Collection[];
-};
-type Collection = { name: string; id: string };
+import type { Collection, Collections, Token, Tokens } from "../helpers";
+import { useCollectionsState } from "../helpers";
 
 //TODO: loading and error handling
 //TODO: tests
@@ -23,6 +18,7 @@ const Home: NextPage = () => {
     useState<Collection | null>(null);
   const [customCollectionName, setCustomCollectionName] = useState<string>("");
   const [customCollectionList, setCustomCollectionList] = useState<Token[]>([]);
+  const [customCollections, setCustomCollections] = useCollectionsState([]);
 
   const {
     data: collectionsList,
@@ -67,9 +63,6 @@ const Home: NextPage = () => {
         }),
     enabled: selectedCollection !== null,
   });
-  useEffect(() => {
-    console.log(collectionData);
-  }, [collectionData]);
 
   return (
     <>
@@ -151,7 +144,38 @@ const Home: NextPage = () => {
                 onChange={(e) => setCustomCollectionName(e.target.value)}
                 placeholder={"Custom Collection Name"}
               />
-              <button className="border-1 ml-5 rounded-md border-black bg-white p-2 text-black">
+              <button
+                className="border-1 ml-5 rounded-md border-black bg-white p-2 text-black"
+                onClick={() => {
+                  if (
+                    customCollections.findIndex(
+                      (collection) =>
+                        collection.collectionName === customCollectionName
+                    ) !== -1
+                  ) {
+                    toast.error(
+                      "That collection name already exists. Please try a different name"
+                    );
+                    return;
+                  }
+
+                  if (customCollectionList.length === 0) {
+                    toast.error(
+                      "Cannot save an empty collection. Please add tokens to it"
+                    );
+                    return;
+                  }
+
+                  setCustomCollections((customCollections) => [
+                    ...customCollections,
+                    {
+                      collectionName: customCollectionName,
+                      tokens: customCollectionList,
+                    },
+                  ]);
+                  toast.success("The collection was saved locally!");
+                }}
+              >
                 Save
               </button>
             </div>
@@ -177,6 +201,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </DndContext>
+      <ToastContainer />
     </>
   );
 };
