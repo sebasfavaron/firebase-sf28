@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Create Custom Collection</title>
+        <title>List Custom Collections</title>
       </Head>
       <div>sims</div>
     </>

@@ -6,17 +6,17 @@ import { Fragment } from "react";
 import { classNames } from "../helpers";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
+  { name: "Create Custom Collections", href: "/", current: true },
   {
-    name: "Create NFT Collection",
-    href: "/create-custom-collection",
+    name: "List Custom Collections",
+    href: "/list-custom-collections",
     current: false,
   },
 ];
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="fixed top-0 w-full bg-gray-800">
+    <Disclosure as="nav" className="fixed top-0 z-10 w-full bg-gray-800">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
