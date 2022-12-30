@@ -139,7 +139,7 @@ const Home: NextPage = () => {
           <div className="ml-5 flex w-[60%] flex-col">
             <div>
               <input
-                className="rounded-md p-2 text-black"
+                className="customCollectionNameInput rounded-md p-2 text-black"
                 value={customCollectionName}
                 onChange={(e) => setCustomCollectionName(e.target.value)}
                 placeholder={"Custom Collection Name"}

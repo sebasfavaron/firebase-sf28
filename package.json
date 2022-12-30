@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "cypress": "node_modules/.bin/cypress open"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.6",
@@ -24,12 +25,14 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.2.3",
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "autoprefixer": "^10.4.7",
+    "cypress": "^12.2.0",
     "eslint": "^8.26.0",
     "eslint-config-next": "13.0.2",
     "eslint-plugin-react": "^7.31.11",
