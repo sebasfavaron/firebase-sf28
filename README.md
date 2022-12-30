@@ -57,5 +57,6 @@ To run:
 
 To test:
 
+- Make sure webapp is running in localhost:3000 by running `npm run dev`
 - `npm run cypress`
 - Run the spec.cy.ts test
