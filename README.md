@@ -46,3 +46,16 @@ The solution uses React as requested, simplified via NextJS which in turn is boo
 ## Persistence
 
 Persistence is achieved using local storage (simplified it using a React hook from the use-persisted-state package). This means no database is needed and no backend is needed to acccess said db
+
+## Running locally
+
+To run:
+
+- Add .env with the correct NEXT_PUBLIC_NFT_API variable
+- `npm i`
+- `npm run dev`
+
+To test:
+
+- `npm run cypress`
+- Run the spec.cy.ts test
