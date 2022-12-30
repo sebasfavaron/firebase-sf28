@@ -29,14 +29,13 @@ const Home: NextPage = () => {
     queryKey: ["collectionList"],
     queryFn: (): Promise<Collections> =>
       fetch(
-        "https://api.reservoir.tools/collections/v5?includeTopBid=false&normalizeRoyalties=false&useNonFlaggedFloorAsk=false&sortBy=allTimeVolume&limit=20"
+        `${process.env.NEXT_PUBLIC_NFT_API}/collections/v5?includeTopBid=false&normalizeRoyalties=false&useNonFlaggedFloorAsk=false&sortBy=allTimeVolume&limit=20`
       ).then((res) => res.json()),
     placeholderData: {
       collections: [{ name: "Loading..", id: "placeholderId" }],
     },
   });
 
-  //TODO: dont fetch if selectedCollection is empty
   const {
     data: collectionData,
     isLoading: isCollectionLoading,
@@ -45,7 +44,7 @@ const Home: NextPage = () => {
     queryKey: ["selectedCollection", selectedCollection],
     queryFn: (): Promise<Tokens | undefined> =>
       fetch(
-        `https://api.reservoir.tools/tokens/v5?collection=${
+        `${process.env.NEXT_PUBLIC_NFT_API}/tokens/v5?collection=${
           selectedCollection?.id || ""
         }&sortBy=floorAskPrice&limit=20&includeTopBid=false&includeAttributes=false&includeQuantity=false&includeDynamicPricing=false&normalizeRoyalties=false`
       )
@@ -90,7 +89,7 @@ const Home: NextPage = () => {
           }
         }}
       >
-        <div className="mt-10 flex h-[100vh] w-[97%] flex-row">
+        <div className="mt-10 flex h-[100vh] w-[97%] flex-row px-8">
           <div className="w-[40%]">
             <Dropdown
               placeholder="Select a collection.."
@@ -137,7 +136,7 @@ const Home: NextPage = () => {
               )}
             </div>
           </div>
-          <div className="ml-5 flex flex-col">
+          <div className="ml-5 flex w-[60%] flex-col">
             <div>
               <input
                 className="rounded-md p-2 text-black"
@@ -166,6 +165,13 @@ const Home: NextPage = () => {
                     return;
                   }
 
+                  if (customCollectionName.length === 0) {
+                    toast.error(
+                      "Name cannot be empty. Please add a name to the custom collection"
+                    );
+                    return;
+                  }
+
                   setCustomCollections((customCollections) => [
                     ...customCollections,
                     {
@@ -180,7 +186,7 @@ const Home: NextPage = () => {
               </Button>
             </div>
             <Droppable id="customCollection">
-              <div className="mt-5 min-h-[100px] w-full min-w-full border-2 border-black p-2">
+              <div className="customCollection mt-5 min-h-[100px] w-full min-w-full border-2 border-black p-2">
                 {customCollectionList.length === 0 ? (
                   <div className="m-auto opacity-70">Drop tokens here</div>
                 ) : (
