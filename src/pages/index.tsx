@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from "../components/Button";
 import { Draggable } from "../components/Draggable";
 import Dropdown from "../components/Dropdown";
 import { Droppable } from "../components/Droppable";
@@ -89,8 +90,8 @@ const Home: NextPage = () => {
           }
         }}
       >
-        <div className="mt-10 flex h-[80%] w-[97%] flex-row">
-          <div className="w-[20%]">
+        <div className="mt-10 flex h-[100vh] w-[97%] flex-row">
+          <div className="w-[40%]">
             <Dropdown
               placeholder="Select a collection.."
               items={
@@ -144,8 +145,7 @@ const Home: NextPage = () => {
                 onChange={(e) => setCustomCollectionName(e.target.value)}
                 placeholder={"Custom Collection Name"}
               />
-              <button
-                className="border-1 ml-5 rounded-md border-black bg-white p-2 text-black"
+              <Button
                 onClick={() => {
                   if (
                     customCollections.findIndex(
@@ -177,24 +177,30 @@ const Home: NextPage = () => {
                 }}
               >
                 Save
-              </button>
+              </Button>
             </div>
             <Droppable id="customCollection">
-              <div className="left-0 mt-5 flex min-h-[100px] w-full min-w-full flex-col border-2 border-black p-2">
-                {customCollectionList.map(
-                  (collectionItem: Token, i: number) => {
-                    return (
-                      <Draggable
-                        key={collectionItem.token.name + i}
-                        id={collectionItem.token.name + i}
-                        origin={"customCollection"}
-                      >
-                        <div key={collectionItem.token.name + i}>
-                          {collectionItem.token.name}
-                        </div>
-                      </Draggable>
-                    );
-                  }
+              <div className="mt-5 min-h-[100px] w-full min-w-full border-2 border-black p-2">
+                {customCollectionList.length === 0 ? (
+                  <div className="m-auto opacity-70">Drop tokens here</div>
+                ) : (
+                  <div className="left-0 flex flex-col">
+                    {customCollectionList.map(
+                      (collectionItem: Token, i: number) => {
+                        return (
+                          <Draggable
+                            key={collectionItem.token.name + i}
+                            id={collectionItem.token.name + i}
+                            origin={"customCollection"}
+                          >
+                            <div key={collectionItem.token.name + i}>
+                              {collectionItem.token.name}
+                            </div>
+                          </Draggable>
+                        );
+                      }
+                    )}
+                  </div>
                 )}
               </div>
             </Droppable>

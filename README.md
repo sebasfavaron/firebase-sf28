@@ -36,3 +36,13 @@ Note that the wireframes in this document are just for reference. More UI elemen
 We should be able to execute your solution without much hassle, and the app should be intuitive to use. We will evaluate your code based on clarity, performance, and maintainability. Make sure to include relevant tests and documentation.
 
 Let us know if you have any questions. Happy coding!
+
+# Solution
+
+## Stack
+
+The solution uses React as requested, simplified via NextJS which in turn is bootstrapped using [CreateT3App](https://create.t3.gg), which provides out-of-the-box support for Typescript and TailwindCSS for type-safe code and consistent UI.
+
+## Persistence
+
+Persistence is achieved using local storage (simplified it using a React hook from the use-persisted-state package). This means no database is needed and no backend is needed to acccess said db

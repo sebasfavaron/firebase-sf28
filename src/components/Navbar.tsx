@@ -15,6 +15,7 @@ const navigation = [
 ];
 
 export default function Navbar() {
+  //TODO: keep correct link highlighted after refresh
   return (
     <Disclosure as="nav" className="fixed top-0 z-10 w-full bg-gray-800">
       {({ open }) => (
