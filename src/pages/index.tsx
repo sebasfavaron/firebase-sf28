@@ -13,6 +13,10 @@ import type { Collection, Collections, Token, Tokens } from "../helpers";
 import { useCollectionsState } from "../helpers";
 
 //TODO: loading and error handling
+//TODO: home button loads home
+//TODO: page for custom scripting (maybe live edition like p5js, also maybe using other performant language beneath)
+//TODO: package custom collections as a project and let the site be a portfolio
+//TODO: and give auth a use
 //TODO: tests
 const Home: NextPage = () => {
   const [selectedCollection, setSelectedCollection] =
