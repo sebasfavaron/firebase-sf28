@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 
 export function classNames(...classes: string[]) {
@@ -10,12 +11,15 @@ export type Collection = { name: string; id: string };
 export type Collections = { collections: Collection[] };
 export type CustomCollections = { collectionName: string; tokens: Token[] }[];
 
-export function useCollectionsState(defaultValue?: CustomCollections) {
+export function useCollectionsState(defaultValue: CustomCollections) {
   return useLocalStorage<CustomCollections>("custom-collections", defaultValue);
 }
 
-export function useLocalStorage<T>(name: string, defaultValue?: T) {
-  const [state, updateState] = useState<T | undefined>(() => {
+export function useLocalStorage<T>(
+  name: string,
+  defaultValue: T
+): [T, Dispatch<SetStateAction<T>>] {
+  const [state, setState] = useState<T>(() => {
     if (typeof window === "undefined") return defaultValue;
     let localState = localStorage.getItem(name);
     if (localState) {
@@ -32,5 +36,5 @@ export function useLocalStorage<T>(name: string, defaultValue?: T) {
       localStorage.setItem(name, JSON.stringify(state));
   }, [state, name]);
 
-  return [state, updateState];
+  return [state, setState];
 }

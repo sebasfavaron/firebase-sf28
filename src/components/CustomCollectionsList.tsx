@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import type { CustomCollections } from "../helpers";
 import { useCollectionsState } from "../helpers";
 
-export function CustomCollectionList() {
+const CustomCollectionList = () => {
   const [customCollections, setCustomCollections] = useCollectionsState([]);
   const [collectionsInEditMode, setCollectionsInEditMode] = useState<string[]>(
     []
@@ -102,6 +102,6 @@ export function CustomCollectionList() {
       })}
     </>
   );
-}
+};
 
 export default CustomCollectionList;
