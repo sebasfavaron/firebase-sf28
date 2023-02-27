@@ -9,10 +9,19 @@ import { SignIn } from "./SignIn";
 import { SignOut } from "./SignOut";
 
 const navigation = [
-  { name: "Create Custom Collections", href: "/", current: true },
+  {
+    name: "Create Custom Collections",
+    href: "/create-custom-collections",
+    current: false,
+  },
   {
     name: "List Custom Collections",
     href: "/list-custom-collections",
+    current: false,
+  },
+  {
+    name: "ThreeJS",
+    href: "/threejs",
     current: false,
   },
 ];
@@ -40,7 +49,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <a href={"#"}>
+                  <Link href={"/"}>
                     <Image
                       className="hidden h-8 w-auto lg:block"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
@@ -48,7 +57,7 @@ export default function Navbar() {
                       width={32}
                       height={32}
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
