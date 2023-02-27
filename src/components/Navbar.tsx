@@ -19,11 +19,6 @@ const navigation = [
     href: "/list-custom-collections",
     current: false,
   },
-  {
-    name: "ThreeJS",
-    href: "/threejs",
-    current: false,
-  },
 ];
 
 export default function Navbar() {
